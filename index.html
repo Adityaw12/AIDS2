@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Segmentation System</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 10px;
+            color: #333;
+        }
+        h3 {
+            text-align: center;
+            padding-top: 10px;
+            color: #333;
+        }
+        table.columns {
+            margin: 0 auto;
+            width: 40%;
+            border-collapse: collapse;
+        }
+        table.columns td {
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+        }
+        #piechart_div, #barchart_div, #bar2chart_div {
+            border: 1px solid #ccc;
+            padding: 5px;
+            background-color: #fff;
+        }
+    </style>
+    <script type="text/javascript">
+        // Your JavaScript code here
+         // Load Charts and the corechart and barchart packages.
+      google.charts.load('current', {'packages':['corechart']});
+
+// Draw the pie chart and bar chart when Charts is loaded.
+google.charts.setOnLoadCallback(drawChart);
+
+function drawChart() {
+
+  var data = new google.visualization.DataTable();
+  data.addColumn('string', 'Topping');
+  data.addColumn('number', 'Slices');
+  data.addRows([
+    ['A', 53],
+    ['B', 40],
+    ['C', 70],
+    ['D', 20]
+  ]);
+
+  var piechart_options = {title:'Pie Chart: Percentage of Customers in each Segment',
+                 width:400,
+                 height:300};
+  var piechart = new google.visualization.PieChart(document.getElementById('piechart_div'));
+  piechart.draw(data, piechart_options);
+
+  var barchart_options = {title:'Barchart: Count of customers in each segment',
+                 width:400,
+                 height:300,
+                 legend: 'none'};
+  var barchart = new google.visualization.BarChart(document.getElementById('barchart_div'));
+  barchart.draw(data, barchart_options);
+
+
+  var data = google.visualization.arrayToDataTable([
+    ['Segment', 'Male', 'Female'],
+    ['A',  30,      23],
+    ['B',  25,      15],
+    ['C',  41,      29],
+    ['D',  10,      10]
+  ]);
+
+  var options = {
+    title : 'Customer Count w.r.t Gender in the Segments',
+    vAxis: {title: 'Customers & Gender'},
+    hAxis: {title: 'Segment'},
+    seriesType: 'bars',
+    series: {5: {type: 'line'}},
+    width:500,
+    height:300,
+  };
+
+  var chart = new google.visualization.ComboChart(document.getElementById('bar2chart_div'));
+  chart.draw(data, options);
+}
+</script>
+</head>
+<body>
+    <h1>CUSTOMER SEGMENTATION SYSTEM</h1>
+    <h3>Some of the insights, got from the data</h3>
+    <!-- Table and divs that hold the pie charts -->
+    <table class="columns">
+        <tr>
+            <td><div id="piechart_div"></div></td>
+            <td><div id="barchart_div"></div></td>
+            <td><div id="bar2chart_div"></div></td>
+        </tr>
+    </table>
+</body>
+</html>
